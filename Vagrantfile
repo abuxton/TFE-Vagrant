@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
       vb.vmx["memsize"] = "4096"
       vb.vmx["numvcpus"] = "2"
   end
-
+	config.vm.synced_folder "tfe/", "/opt/tfe"
   #Install Terraform Enterprise
   config.vm.provision "shell", run: "once", inline: <<-SHELL
     #apt-get update
@@ -30,8 +30,8 @@ Vagrant.configure("2") do |config|
       then
         echo "License found.  Automating Install"
         echo "Creating App Dir"
-        mkdir /tfe/app -p
-        mkdir /tfe/snapshots -p
+        mkdir /opt/tfe/app -p
+        mkdir /opt/tfe/snapshots -p
         echo "Copying replicated conf"
         cp /vagrant/config/replicated.conf /etc/replicated.conf
         apt-get update
@@ -46,9 +46,9 @@ Vagrant.configure("2") do |config|
         echo "Install complete..."
         echo "Console available: https://127.0.0.1:8800"
         echo "Console Password: ${PASS}"
-        echo "TFE Login:  https://127.0.0.1/admin/account/new?token=${TOKEN}" 
+        echo "TFE Login:  https://127.0.0.1/admin/account/new?token=${TOKEN}"
       else
-        echo "Performing manual install"  
+        echo "Performing manual install"
         curl -s https://install.terraform.io/ptfe/stable | sudo bash
       fi
   SHELL

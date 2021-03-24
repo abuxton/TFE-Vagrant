@@ -22,7 +22,7 @@
         "value": "hashicorp/build-worker:now"
     },
     "disk_path": {
-        "value": "/tfe/app"
+        "value": "/opt/tfe/app"
     },
     "enable_metrics_collection": {
         "value": "1"
