@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
       vb.vmx["memsize"] = "4096"
       vb.vmx["numvcpus"] = "2"
   end
-	config.vm.synced_folder "tfe/", "/opt/tfe"
+  # config.vm.synced_folder "tfe/", "/opt/tfe"
   #Install Terraform Enterprise
   config.vm.provision "shell", run: "once", inline: <<-SHELL
     #apt-get update
